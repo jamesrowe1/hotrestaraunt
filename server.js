@@ -29,6 +29,16 @@ var reservations = [
   },
 ];
 
+var waitList = [
+  {
+    routeName: "james",
+    name: "James Kim",
+    number: "123-456-7899",
+    email: "jyk524@gmail.com",
+    id: 190,
+  },
+];
+
 // post new reservation route
 // Create New reservations - takes in JSON input
 app.post("/api/reservations", function (req, res) {
@@ -44,7 +54,11 @@ app.post("/api/reservations", function (req, res) {
 
   console.log(newReservation);
 
-  reservations.push(newReservation);
+  if (reservations.length < 5) {
+    reservations.push(newReservation);
+  } else {
+    waitList.push(newReservation);
+  }
 
   res.json(newReservation);
 });
@@ -55,11 +69,10 @@ app.get("/api/reservations", function (req, res) {
   if (reservations.length > 0) {
     return res.json(reservations);
   }
-
-  return res.json(false);
+  return res.json("No reservations!");
 });
 
-//     Create a set of routes for displaying the HTML pages
+// Create a set of routes for displaying the HTML pages
 
 // index route sendfile
 
@@ -78,3 +91,6 @@ app.get("/reservations", function (req, res) {
 });
 
 //     Use jQuery to run AJAX calls to GET and POST data from users to the Express server
+app.listen(PORT, function () {
+  console.log("App listening on PORT " + PORT);
+});
