@@ -59,7 +59,16 @@
         </div>
       </div>
     </div>
-
+    <script>
+      function viewWaitList() {
+        $.ajax({
+          url: "/api/waitlist",
+          method: "GET",
+        }).then(function (data) {
+          console.log(data);
+        });
+      }
+    </script>
     <!-- ajax here. i dunno... -->
     <script type="text/javascript"></script>
     <script
