@@ -39,6 +39,42 @@ var waitList = [
   },
 ];
 
+// get reservation route
+
+app.get("/api/reservations", function (req, res) {
+  if (reservations.length > 0) {
+    return res.json(reservations);
+  }
+  return res.json("No reservations!");
+});
+
+//get waitlist route
+
+app.get("/api/waitlist", function (req, res) {
+  if (waitList.length > 0) {
+    return res.json(waitList);
+  }
+  return res.json("No reservations in the waiting list!");
+});
+
+// Create a set of routes for displaying the HTML pages
+
+// index route sendfile
+
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+// view tables route sendfile
+app.get("/viewtables", function (req, res) {
+  res.sendFile(path.join(__dirname, "viewtables.html"));
+});
+
+// reservation route sendfile
+app.get("/reservations", function (req, res) {
+  res.sendFile(path.join(__dirname, "reservations.html"));
+});
+
 // post new reservation route
 // Create New reservations - takes in JSON input
 app.post("/api/reservations", function (req, res) {
@@ -61,33 +97,6 @@ app.post("/api/reservations", function (req, res) {
   }
 
   res.json(newReservation);
-});
-
-// get old reservation route
-
-app.get("/api/reservations", function (req, res) {
-  if (reservations.length > 0) {
-    return res.json(reservations);
-  }
-  return res.json("No reservations!");
-});
-
-// Create a set of routes for displaying the HTML pages
-
-// index route sendfile
-
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
-
-// view tables route sendfile
-app.get("/viewtables", function (req, res) {
-  res.sendFile(path.join(__dirname, "viewtables.html"));
-});
-
-// reservation route sendfile
-app.get("/reservations", function (req, res) {
-  res.sendFile(path.join(__dirname, "reservations.html"));
 });
 
 //     Use jQuery to run AJAX calls to GET and POST data from users to the Express server
