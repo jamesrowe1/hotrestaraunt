@@ -26,13 +26,8 @@
           It uses utility classes for typography and spacing to space content
           out within the larger container.
         </p>
-        <a class="btn btn-primary btn-lg" href="./index.html" role="button"
-          >Home</a
-        >
-        <a
-          class="btn btn-primary btn-lg"
-          href="./reservations.html"
-          role="button"
+        <a class="btn btn-primary btn-lg" href="/" role="button">Home</a>
+        <a class="btn btn-primary btn-lg" href="/reservations" role="button"
           >Make Reservation</a
         >
       </div>
@@ -60,14 +55,66 @@
       </div>
     </div>
     <script>
-      function viewWaitList() {
+      const tableList = $("#tableList");
+      const waitList = $("#waitList");
+      function getTableList() {
+        $.ajax({
+          url: "/api/reservations",
+          method: "GET",
+        }).then(function (data) {
+          console.log(data);
+
+          displayTableList(data);
+        });
+      }
+      function displayTableList(tableItems) {
+        let resNum = 1;
+        console.log(tableItems);
+
+        tableItems.forEach((reservation) => {
+          let resItem = $("<li>");
+          resItem.append(
+            $("<h2>").text("Table #" + resNum),
+            $("<hr>"),
+            $("<h2>").text("ID: " + reservation.id),
+            $("<h2>").text("Name: " + reservation.name),
+            $("<h2>").text("Email: " + reservation.email),
+            $("<h2>").text("Phone: " + reservation.number)
+          );
+
+          tableList.append(resItem);
+        });
+      }
+      function getWaitList() {
         $.ajax({
           url: "/api/waitlist",
           method: "GET",
         }).then(function (data) {
           console.log(data);
+
+          displayWaitList(data);
         });
       }
+      function displayWaitList(waitItems) {
+        let resNum = 1;
+        console.log(waitItems);
+
+        waitItems.forEach((reservation) => {
+          let resItem = $("<li>");
+          resItem.append(
+            $("<h2>").text("Table #" + resNum),
+            $("<hr>"),
+            $("<h2>").text("ID: " + reservation.id),
+            $("<h2>").text("Name: " + reservation.name),
+            $("<h2>").text("Email: " + reservation.email),
+            $("<h2>").text("Phone: " + reservation.number)
+          );
+
+          waitList.append(resItem);
+        });
+      }
+      getTableList();
+      getWaitList();
     </script>
     <!-- ajax here. i dunno... -->
     <script type="text/javascript"></script>

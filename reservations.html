@@ -27,10 +27,8 @@
           It uses utility classes for typography and spacing to space content
           out within the larger container.
         </p>
-        <a class="btn btn-primary btn-lg" href="./index.html" role="button"
-          >Home</a
-        >
-        <a class="btn btn-primary btn-lg" href="./viewtables.html" role="button"
+        <a class="btn btn-primary btn-lg" href="/" role="button">Home</a>
+        <a class="btn btn-primary btn-lg" href="/viewtables" role="button"
           >View Tables</a
         >
       </div>
@@ -93,22 +91,19 @@
         event.preventDefault();
         const newReservation = {
           name: $("#name").val(),
-          number: $("#phone"),
-          email: $("#email"),
-          id: $("#uniqueid"),
+          number: $("#phone").val(),
+          email: $("#email").val(),
+          id: $("#uniqueid").val(),
         };
+        console.log(newReservation);
 
-        $.post("/api/reservations", newReservation).then(function (data) {
+        $.post("/api/reservations", newReservation, function (data) {
           console.log("added reservation", data);
           alert("Made new reservation");
         });
       });
     </script>
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
+
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
       integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
@@ -119,5 +114,6 @@
       integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
       crossorigin="anonymous"
     ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   </body>
 </html>
